@@ -1,0 +1,268 @@
+{
+	"info": {
+		"_postman_id": "e036ed21-8bab-416b-87af-1fa57c45e551",
+		"name": "Appshare",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "afa3c503-eb26-4704-bdbb-985b6d87c266",
+						"exec": [
+							"let responseData = pm.response.json()",
+							"pm.globals.set(\"appshare_auth_token\", responseData['auth_token']);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"username\",\n\t\"password\": \"password\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://appshare.herokuapp.com/api/auth/token/login",
+					"protocol": "https",
+					"host": [
+						"appshare",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"auth",
+						"token",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UploadURL",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e462152d-1d07-43d1-8d81-d43e525fae2a",
+						"exec": [
+							"let responseData = pm.response.json()",
+							"pm.globals.set(\"appshare_secret_url\", responseData['secret_url']);",
+							"pm.globals.set(\"appshare_password\", responseData['password']);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{appshare_auth_token}}",
+						"type": "text"
+					},
+					{
+						"key": "",
+						"name": "Content-Type",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\n\t\"url\": \"https://github.com/KarolJagodzinski\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://appshare.herokuapp.com/api/secure/url/",
+					"protocol": "https",
+					"host": [
+						"appshare",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"secure",
+						"url",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UploadFile",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4b0297f2-4199-4ac6-9ea5-d6c04c1338f4",
+						"exec": [
+							"let responseData = pm.response.json()",
+							"pm.globals.set(\"appshare_secret_url\", responseData['secret_url']);",
+							"pm.globals.set(\"appshare_password\", responseData['password']);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{appshare_auth_token}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Disposition",
+						"value": "attachment; filename=upload.txt",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "file",
+					"file": {
+						"src": ""
+					},
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://appshare.herokuapp.com/api/secure/file/<filename.ext>/",
+					"protocol": "https",
+					"host": [
+						"appshare",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"secure",
+						"file",
+						"<filename.ext>",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RetrieveSecret",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"url\": \"{{appshare_secret_url}}\",\n    \"password\": \"{{appshare_password}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://appshare.herokuapp.com/api/secret/",
+					"protocol": "https",
+					"host": [
+						"appshare",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"secret",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Statistics",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{appshare_auth_token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://appshare.herokuapp.com/api/statistics/",
+					"protocol": "https",
+					"host": [
+						"appshare",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"statistics",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

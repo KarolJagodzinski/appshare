@@ -1,0 +1,10 @@
+{% load static %}
+
+{% block content %}
+<p>Password: {{ password }}</p>
+<p>Secret URL: <a href="{{ access_url }}">{{ access_url }}</a></p>
+
+
+    <a href="/upload"><button>Back to Upload</button></a>
+{% endblock %}
+

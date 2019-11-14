@@ -1,0 +1,12 @@
+{% load static %}
+
+{% block content %}
+    {% if request.user.is_authenticated %}
+        <a href="/accounts/logout"><button>LOGOUT</button></a>
+        <a href="/upload/file"><button>UPLOAD FILE</button></a>
+        <a href="/upload/url"><button>UPLOAD URL</button></a>
+    {% else %}
+        <a href="/accounts/login"><button>LOGIN</button></a>
+    {% endif %}
+{% endblock %}
+
